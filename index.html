@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selina'nın Almanca Laboratuvarı — Akkusativ & Modalverben</title>
+<style>
+:root{
+  --bg:#f6f3ff; --card:#ffffff; --ink:#26213a; --muted:#746e86;
+  --purple:#7357e8; --purple2:#9d8af4; --pink:#ff76a8; --green:#29b67a;
+  --red:#eb5c74; --yellow:#f8c95f; --line:#e9e3f6; --soft:#f0ebff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); background:
+  radial-gradient(circle at 0 0,#eee7ff 0,transparent 32%),
+  radial-gradient(circle at 100% 10%,#ffe6ef 0,transparent 28%),var(--bg);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+button,input{font:inherit}
+.shell{max-width:1120px;margin:auto;padding:24px 18px 70px}
+.hero{
+  background:linear-gradient(135deg,#2c2449 0%,#6045cd 55%,#9568eb 100%);
+  color:white;border-radius:28px;padding:34px;box-shadow:0 25px 60px rgba(69,45,146,.22);
+  position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"der → den";position:absolute;right:-20px;bottom:-30px;font-size:88px;
+  font-weight:900;opacity:.08;transform:rotate(-8deg)
+}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;font-weight:800}
+h1{font-size:clamp(34px,6vw,62px);letter-spacing:-.04em;line-height:1.02;margin:8px 0 12px}
+.hero p{max-width:700px;font-size:17px;line-height:1.65;margin:0;color:#eee9ff}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{
+  border:0;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;
+  transition:.18s transform,.18s opacity;background:white;color:#453598;text-decoration:none;display:inline-block
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.secondary{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.2)}
+.progress-wrap{margin:22px 0 8px;background:#e9e3f6;height:10px;border-radius:99px;overflow:hidden}
+.progress{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));transition:.35s}
+.progress-label{color:var(--muted);font-size:13px;text-align:right}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.card{
+  background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:22px;padding:24px;
+  box-shadow:0 14px 40px rgba(62,44,107,.08)
+}
+.card.full{grid-column:1/-1}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:var(--soft);color:#6048c8;font-size:12px;font-weight:800}
+h2{font-size:27px;margin:12px 0 8px;letter-spacing:-.025em}
+h3{font-size:18px;margin:18px 0 8px}
+p{line-height:1.65}
+.muted{color:var(--muted)}
+.rule{
+  padding:16px;border-radius:16px;background:#faf8ff;border:1px dashed #cabdf2;margin:14px 0;
+  font-size:16px;line-height:1.7
+}
+.rule b{color:#5c44ca}
+.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.article{
+  border-radius:16px;padding:16px;background:#faf8ff;border:1px solid var(--line);text-align:center
+}
+.article strong{font-size:22px;display:block;margin-top:5px}
+.article.changed{background:#fff1f5;border-color:#ffc8da}
+.example{
+  padding:12px 14px;border-left:4px solid var(--purple);background:#faf8ff;border-radius:0 12px 12px 0;margin:9px 0
+}
+.highlight{color:#684ce0;font-weight:800}
+.practice{
+  margin-top:16px;border-top:1px solid var(--line);padding-top:16px
+}
+.answer-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.answer-buttons button,.option{
+  border:1px solid var(--line);background:white;color:var(--ink);padding:10px 13px;border-radius:12px;
+  cursor:pointer;font-weight:700;transition:.16s
+}
+.answer-buttons button:hover,.option:hover{border-color:#9b87ef;background:#f7f3ff}
+.feedback{min-height:24px;font-weight:750;margin-top:8px}
+.good{color:var(--green)} .bad{color:var(--red)}
+.modal-table{width:100%;border-collapse:separate;border-spacing:0 7px;margin:8px 0}
+.modal-table td,.modal-table th{padding:10px 12px;text-align:left}
+.modal-table th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.modal-table tr:not(:first-child){background:#faf8ff}
+.modal-table tr:not(:first-child) td:first-child{border-radius:12px 0 0 12px;font-weight:850}
+.modal-table tr:not(:first-child) td:last-child{border-radius:0 12px 12px 0}
+.sentence-machine{
+  background:#2c2449;color:white;border-radius:18px;padding:18px;margin-top:14px
+}
+.tokens{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.token{background:#fff;color:#342955;border:0;border-radius:10px;padding:9px 11px;font-weight:800;cursor:pointer}
+.built{min-height:48px;padding:12px;background:rgba(255,255,255,.1);border-radius:12px;line-height:1.6}
+.small-btn{border:0;border-radius:10px;padding:9px 11px;margin-right:6px;cursor:pointer;font-weight:800}
+.quiz-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.quiz-status{font-size:13px;color:var(--muted);font-weight:700}
+.question{font-size:21px;font-weight:850;line-height:1.4;margin:16px 0}
+.options{display:grid;gap:10px}
+.option{text-align:left;padding:13px 14px}
+.option.selected{border-color:var(--purple);background:var(--soft)}
+.option.correct{border-color:#74d5aa;background:#edfdf5}
+.option.wrong{border-color:#f29aaa;background:#fff0f3}
+.quiz-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.quiz-nav button{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}
+.prev{background:#eee9f8;color:#463869}.next{background:var(--purple);color:white}
+.score{
+  display:none;text-align:center;padding:25px 14px
+}
+.score-number{font-size:70px;line-height:1;font-weight:950;color:var(--purple)}
+.score-title{font-size:25px;font-weight:900;margin:10px}
+.review{margin-top:18px;text-align:left;display:grid;gap:10px}
+.review-item{padding:13px 14px;border-radius:14px;background:#faf8ff;border:1px solid var(--line)}
+.review-item b{display:block;margin-bottom:4px}
+.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:24px}
+.confetti{position:fixed;pointer-events:none;inset:0;overflow:hidden;z-index:99}
+.piece{position:absolute;width:9px;height:14px;top:-20px;animation:fall 1.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:780px){
+  .grid{grid-template-columns:1fr}.card.full{grid-column:auto}.article-grid{grid-template-columns:1fr}
+  .hero{padding:26px 22px}.quiz-head{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div id="confetti" class="confetti"></div>
+<main class="shell">
+  <section class="hero">
+    <div class="kicker">Selina için özel Almanca mini ders</div>
+    <h1>Akkusativ + Modalverben</h1>
+    <div class="hero-buttons">
+      <a class="btn" href="#akk">Derse başla</a>
+      <a class="btn secondary" href="#quiz">Direkt teste git</a>
+    </div>
+  </section>
+
+  <div class="progress-wrap"><div class="progress" id="pageProgress"></div></div>
+  <div class="progress-label" id="progressLabel">Öğrenme ilerlemesi: %0</div>
+
+  <div class="grid">
+    <section class="card" id="akk">
+      <span class="tag">01 • Akkusativ</span>
+      <h2>“Kimi? Neyi?” hâli</h2>
+      <p class="muted">Akkusativ, cümlede eylemden doğrudan etkilenen şeyi ya da kişiyi gösterir.</p>
+
+      <div class="rule">
+        <b>Mini formül:</b><br>
+        Özne + Fiil + <b>Kimi / Neyi?</b><br><br>
+        Ich kaufe <b>einen Kaffee</b>.<br>
+        → Neyi satın alıyorum? <b>Bir kahveyi.</b>
+      </div>
+
+      <h3>En önemli değişiklik</h3>
+      <div class="article-grid">
+        <div class="article changed">der → <strong>den</strong><span>einen</span></div>
+        <div class="article">die → <strong>die</strong><span>eine</span></div>
+        <div class="article">das → <strong>das</strong><span>ein</span></div>
+      </div>
+
+      <p><b>Kısacası:</b> Akkusativ'de en çok dikkat edeceğin şey <span class="highlight">maskulin isimlerdir.</span> “der/ein” değişir; “die/das” aynı kalır.</p>
+
+      <div class="example">Ich sehe <b>den Mann</b>. → Adamı görüyorum.</div>
+      <div class="example">Sie kauft <b>eine Tasche</b>. → Bir çanta satın alıyor.</div>
+      <div class="example">Wir haben <b>ein Auto</b>. → Bir arabamız var.</div>
+
+      <div class="practice">
+        <h3>Selina, sıra sende 👀</h3>
+        <p>Ich sehe ___ Hund. <span class="muted">(der Hund)</span></p>
+        <div class="answer-buttons">
+          <button onclick="akkPractice('der')">der</button>
+          <button onclick="akkPractice('den')">den</button>
+          <button onclick="akkPractice('dem')">dem</button>
+        </div>
+        <div class="feedback" id="akkFeedback"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Nasıl bulursun?</h2>
+      <p class="muted">Önce fiili bul. Sonra fiile “kimi?” veya “neyi?” sor.</p>
+
+      <div class="rule">
+        <b>Selina liest ein Buch.</b><br>
+        Fiil: <b>liest</b> (okuyor)<br>
+        Neyi okuyor? → <b>ein Buch</b><br>
+        O halde: <b>ein Buch = Akkusativ nesne</b>
+      </div>
+
+      <h3>Sık kullanılan Akkusativ fiilleri</h3>
+      <p><b>haben</b> sahip olmak · <b>sehen</b> görmek · <b>kaufen</b> satın almak · <b>brauchen</b> ihtiyaç duymak · <b>lieben</b> sevmek · <b>essen</b> yemek · <b>trinken</b> içmek</p>
+
+      <div class="practice">
+        <p><b>Hangisi doğru?</b></p>
+        <div class="answer-buttons">
+          <button onclick="akkSentence(0)">Ich kaufe ein Apfel.</button>
+          <button onclick="akkSentence(1)">Ich kaufe einen Apfel.</button>
+        </div>
+        <div class="feedback" id="akkSentenceFeedback"></div>
+      </div>
+    </section>
+
+    <section class="card full" id="modal">
+      <span class="tag">02 • Modalverben</span>
+      <h2>Modalverb = cümlenin “niyeti”</h2>
+      <p class="muted">Bir şeyi yapabilmek, istemek, zorunda olmak, izinli olmak… Bunları modal fiiller söyler.</p>
+
+      <table class="modal-table">
+        <tr><th>Modalverb</th><th>Anlam</th><th>Örnek</th></tr>
+        <tr><td>können</td><td>-ebilmek / yapabilmek</td><td>Ich kann schwimmen. → Yüzebilirim.</td></tr>
+        <tr><td>müssen</td><td>zorunda olmak</td><td>Ich muss lernen. → Ders çalışmak zorundayım.</td></tr>
+        <tr><td>wollen</td><td>istemek</td><td>Ich will schlafen. → Uyumak istiyorum.</td></tr>
+        <tr><td>dürfen</td><td>izinli olmak</td><td>Du darfst gehen. → Gidebilirsin / izinlisin.</td></tr>
+        <tr><td>sollen</td><td>-meli / -malı</td><td>Du sollst lernen. → Ders çalışmalısın.</td></tr>
+        <tr><td>mögen</td><td>sevmek / hoşlanmak</td><td>Ich mag Kaffee. → Kahveyi severim.</td></tr>
+        <tr><td>möchten</td><td>istemek (kibar)</td><td>Ich möchte einen Tee. → Bir çay isterim.</td></tr>
+      </table>
+
+      <div class="rule">
+        <b>Modalverb cümlesinin temel yapısı:</b><br>
+        <b>Özne + çekimli modalverb + diğer bilgiler + ana fiil</b><br>
+        Ana fiil <b>mastar hâlinde</b> ve çoğu temel cümlede <b>en sonda</b> olur.<br><br>
+        Ich <b>kann</b> heute Deutsch <b>lernen</b>.<br>
+        Wir <b>müssen</b> morgen früh <b>arbeiten</b>.<br>
+        Selina <b>möchte</b> einen Kaffee <b>trinken</b>.
+      </div>
+
+      <h3>En önemli çekimler</h3>
+      <table class="modal-table">
+        <tr><th>Kişi</th><th>können</th><th>müssen</th><th>wollen</th><th>dürfen</th></tr>
+        <tr><td>ich</td><td>kann</td><td>muss</td><td>will</td><td>darf</td></tr>
+        <tr><td>du</td><td>kannst</td><td>musst</td><td>willst</td><td>darfst</td></tr>
+        <tr><td>er/sie/es</td><td>kann</td><td>muss</td><td>will</td><td>darf</td></tr>
+        <tr><td>wir</td><td>können</td><td>müssen</td><td>wollen</td><td>dürfen</td></tr>
+        <tr><td>ihr</td><td>könnt</td><td>müsst</td><td>wollt</td><td>dürft</td></tr>
+        <tr><td>sie/Sie</td><td>können</td><td>müssen</td><td>wollen</td><td>dürfen</td></tr>
+      </table>
+
+      <h3>Anlam farklarını karıştırma</h3>
+      <div class="example"><b>können</b> = bir şeyi yapabilme becerisi / imkânı<br>Ich kann Deutsch sprechen. → Almanca konuşabiliyorum.</div>
+      <div class="example"><b>dürfen</b> = izin<br>Ich darf hier parken. → Buraya park etmeme izin var.</div>
+      <div class="example"><b>müssen</b> = zorunluluk<br>Ich muss heute arbeiten. → Bugün çalışmak zorundayım.</div>
+      <div class="example"><b>sollen</b> = tavsiye, görev veya başkasından gelen beklenti<br>Ich soll mehr Wasser trinken. → Daha fazla su içmeliyim.</div>
+      <div class="example"><b>wollen</b> = doğrudan ve güçlü istek<br>Ich will Pizza essen. → Pizza yemek istiyorum.</div>
+      <div class="example"><b>möchten</b> = daha nazik istek<br>Ich möchte eine Suppe. → Bir çorba istiyorum.</div>
+
+      <h3>Olumsuz cümle</h3>
+      <div class="rule">
+        <b>nicht</b> genellikle yapmak istemediğin / yapamadığın eylemi olumsuzlaştırır:<br>
+        Ich kann heute <b>nicht</b> kommen. → Bugün gelemem.<br>
+        Wir wollen heute <b>nicht</b> kochen. → Bugün yemek yapmak istemiyoruz.
+      </div>
+
+      <div class="sentence-machine">
+        <b>Cümle Makinesi</b>
+        <p style="opacity:.75;margin:5px 0 10px">Kelimelere doğru sırayla bas: “Selina bugün Almanca öğrenebilir.”</p>
+        <div class="tokens" id="tokens">
+          <button class="token" onclick="addToken(this)">Deutsch</button>
+          <button class="token" onclick="addToken(this)">Selina</button>
+          <button class="token" onclick="addToken(this)">lernen</button>
+          <button class="token" onclick="addToken(this)">heute</button>
+          <button class="token" onclick="addToken(this)">kann</button>
+        </div>
+        <div class="built" id="built">Burada cümlen oluşacak…</div>
+        <div style="margin-top:10px">
+          <button class="small-btn" onclick="checkSentence()">Kontrol et</button>
+          <button class="small-btn" onclick="resetSentence()">Sıfırla</button>
+        </div>
+        <div class="feedback" id="sentenceFeedback"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="tag">Modalverb ipucu</span>
+      <h2>Fiil neden sona gidiyor?</h2>
+      <p>Çünkü modal fiil çekimi üstlenir. Asıl eylem ise mastar hâliyle sona “park eder”.</p>
+      <div class="example">Ich <b>muss</b> morgen früh <b>arbeiten</b>.</div>
+      <div class="example">Wir <b>wollen</b> Pizza <b>essen</b>.</div>
+      <div class="example">Du <b>darfst</b> hier nicht <b>rauchen</b>.</div>
+      <p class="muted">Ana fiili ortada bırakırsan Almanca sana hafifçe kaşını kaldırır.</p>
+    </section>
+
+    <section class="card">
+      <span class="tag">İkisini birleştir</span>
+      <h2>Akkusativ + Modalverb</h2>
+      <div class="rule">
+        Ich <b>möchte</b> <span class="highlight">einen Kaffee</span> <b>trinken</b>.<br><br>
+        • möchte → çekimli modalverb<br>
+        • einen Kaffee → Akkusativ nesne<br>
+        • trinken → mastar, en sonda
+      </div>
+      <div class="practice">
+        <p><b>Boşluğu tamamla:</b> Wir wollen ___ Film sehen. <span class="muted">(der Film)</span></p>
+        <div class="answer-buttons">
+          <button onclick="comboPractice('der')">der</button>
+          <button onclick="comboPractice('den')">den</button>
+          <button onclick="comboPractice('dem')">dem</button>
+        </div>
+        <div class="feedback" id="comboFeedback"></div>
+      </div>
+    </section>
+
+
+    <section class="card" id="uhrzeit">
+      <span class="tag">03 • Uhrzeit</span>
+      <h2>Saatler</h2>
+      <p class="muted">Almancada saati söylerken iki kullanım çok yaygındır: resmî/dijital kullanım ve günlük konuşma.</p>
+
+      <div class="rule">
+        <b>Resmî / dijital:</b><br>
+        08:15 → Es ist <b>acht Uhr fünfzehn</b>.<br>
+        14:30 → Es ist <b>vierzehn Uhr dreißig</b>.<br><br>
+        <b>Günlük konuşma:</b><br>
+        08:15 → Es ist <b>Viertel nach acht</b>.<br>
+        08:30 → Es ist <b>halb neun</b>.<br>
+        08:45 → Es ist <b>Viertel vor neun</b>.
+      </div>
+
+      <h3>vor / nach / halb</h3>
+      <div class="example"><b>zehn nach sieben</b> = 07:10</div>
+      <div class="example"><b>zwanzig vor neun</b> = 08:40</div>
+      <div class="example"><b>halb zehn</b> = 09:30 — dikkat: “onun yarısı” değil, “ona yarım var” mantığı.</div>
+
+      <div class="practice">
+        <p><b>08:30 Almancada hangisi?</b></p>
+        <div class="answer-buttons">
+          <button onclick="timePractice(0)">halb acht</button>
+          <button onclick="timePractice(1)">halb neun</button>
+          <button onclick="timePractice(2)">neun Uhr halb</button>
+        </div>
+        <div class="feedback" id="timeFeedback"></div>
+      </div>
+    </section>
+
+    <section class="card" id="essen">
+      <span class="tag">04 • Essen & Trinken</span>
+      <h2>Yeme–İçme</h2>
+      <p class="muted">Bu ünitede artikeller, Akkusativ ve möchten birlikte çok sık kullanılır.</p>
+
+      <table class="modal-table">
+        <tr><th>Kelime</th><th>Anlamı</th><th>Akkusativ örneği</th></tr>
+        <tr><td>der Kaffee</td><td>kahve</td><td>einen Kaffee</td></tr>
+        <tr><td>der Tee</td><td>çay</td><td>einen Tee</td></tr>
+        <tr><td>die Suppe</td><td>çorba</td><td>eine Suppe</td></tr>
+        <tr><td>die Pizza</td><td>pizza</td><td>eine Pizza</td></tr>
+        <tr><td>das Wasser</td><td>su</td><td>ein Wasser</td></tr>
+        <tr><td>das Brot</td><td>ekmek</td><td>ein Brot</td></tr>
+      </table>
+
+      <div class="rule">
+        <b>Kafede çok işine yarayacak kalıplar:</b><br>
+        Ich <b>möchte</b> einen Kaffee. → Bir kahve istiyorum.<br>
+        Ich <b>hätte gern</b> eine Suppe. → Bir çorba rica ediyorum / almak isterim.<br>
+        Was <b>möchtest</b> du trinken? → Ne içmek istersin?<br>
+        Ich <b>mag</b> keinen Kaffee. → Kahve sevmiyorum.
+      </div>
+
+      <h3>mögen ve möchten farkı</h3>
+      <div class="example"><b>Ich mag Pizza.</b> → Pizzayı severim.</div>
+      <div class="example"><b>Ich möchte eine Pizza.</b> → Bir pizza istiyorum.</div>
+
+      <div class="practice">
+        <p><b>Doğru sipariş hangisi?</b> “Bir çay istiyorum.”</p>
+        <div class="answer-buttons">
+          <button onclick="foodPractice(0)">Ich möchte ein Tee.</button>
+          <button onclick="foodPractice(1)">Ich möchte einen Tee.</button>
+          <button onclick="foodPractice(2)">Ich will einen Tee trinken müssen.</button>
+        </div>
+        <div class="feedback" id="foodFeedback"></div>
+      </div>
+    </section>
+
+    <section class="card full" id="quiz">
+      <span class="tag">Final • Selina Testi</span>
+      <div class="quiz-head">
+        <div>
+          <h2>Hazır mısın?</h2>
+          <p class="muted" style="margin:0">16 soru: Akkusativ, Modalverben, saatler ve yeme–içme karışık.</p>
+        </div>
+        <div class="quiz-status" id="quizStatus">Soru 1 / 10</div>
+      </div>
+
+      <div id="quizArea">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="quiz-nav">
+          <button class="prev" onclick="prevQuestion()">← Önceki</button>
+          <button class="next" id="nextBtn" onclick="nextQuestion()">Sonraki →</button>
+        </div>
+      </div>
+
+      <div class="score" id="score">
+        <div class="score-number" id="scoreNumber">0/10</div>
+        <div class="score-title" id="scoreTitle"></div>
+        <p id="scoreText"></p>
+        <div class="review" id="review"></div>
+        <button class="btn" style="background:var(--purple);color:white;margin-top:18px" onclick="restartQuiz()">Testi tekrar çöz</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">Selina'nın Almanca Laboratuvarı • Akkusativ • Modalverben • Uhrzeit • Essen & Trinken</div>
+</main>
+
+<script>
+let lessonPoints=0;
+function gainPoint(){
+  lessonPoints=Math.min(6,lessonPoints+1);
+  const pct=Math.round(lessonPoints/6*100);
+  document.getElementById("pageProgress").style.width=pct+"%";
+  document.getElementById("progressLabel").textContent="Öğrenme ilerlemesi: %"+pct;
+}
+function setFeedback(id,ok,text){
+  const el=document.getElementById(id);
+  el.className="feedback "+(ok?"good":"bad");
+  el.textContent=(ok?"✓ ":"✗ ")+text;
+}
+function akkPractice(a){
+  const ok=a==="den";
+  setFeedback("akkFeedback",ok,ok?"Harika! der Hund → Akkusativ'de den Hund.":"Maskulin isim! der → den değişimini hatırla.");
+  if(ok) gainPoint();
+}
+function akkSentence(i){
+  const ok=i===1;
+  setFeedback("akkSentenceFeedback",ok,ok?"Doğru: der Apfel → einen Apfel.":"“Apfel” maskulin: ein → einen olmalı.");
+  if(ok) gainPoint();
+}
+
+function timePractice(i){
+  const ok=i===1;
+  setFeedback("timeFeedback",ok,ok?"Doğru: 08:30 = halb neun.":"Almancada halb neun, 'dokuza yarım saat var' demektir.");
+  if(ok) gainPoint();
+}
+function foodPractice(i){
+  const ok=i===1;
+  setFeedback("foodFeedback",ok,ok?"Doğru: der Tee → Akkusativ einen Tee.":"Tee maskulin: ein değil, einen gerekir.");
+  if(ok) gainPoint();
+}
+
+function comboPractice(a){
+  const ok=a==="den";
+  setFeedback("comboFeedback",ok,ok?"Evet: der Film → den Film. “sehen” de sonda kaldı.":"Film maskulin; Akkusativ'de “den Film” gerekir.");
+  if(ok) gainPoint();
+}
+
+let built=[];
+function addToken(btn){
+  if(btn.disabled) return;
+  built.push(btn.textContent);
+  btn.disabled=true; btn.style.opacity=".35";
+  document.getElementById("built").textContent=built.join(" ");
+}
+function resetSentence(){
+  built=[];
+  document.getElementById("built").textContent="Burada cümlen oluşacak…";
+  document.querySelectorAll("#tokens .token").forEach(b=>{b.disabled=false;b.style.opacity="1"});
+  document.getElementById("sentenceFeedback").textContent="";
+}
+function checkSentence(){
+  const correct="Selina kann heute Deutsch lernen";
+  const current=built.join(" ");
+  const ok=current===correct;
+  setFeedback("sentenceFeedback",ok,ok?"Mükemmel. Modalverb 2. sırada, ana fiil sonda.":"Henüz değil. Hedef: Selina + kann + heute + Deutsch + lernen.");
+  if(ok) gainPoint();
+}
+
+const quiz=[
+ {q:"Ich sehe ___ Mann.",o:["der","den","dem"],a:1,e:"der Mann, Akkusativ'de den Mann olur.",topic:"Akkusativ"},
+ {q:"Hangisi doğru?",o:["Ich kann Deutsch sprechen.","Ich kann spreche Deutsch.","Ich Deutsch kann sprechen."],a:0,e:"Modalverb 2. sırada; ana fiil mastar olarak sona gider.",topic:"Modalverben"},
+ {q:"Sie kauft ___ Tasche.",o:["eine","einen","einer"],a:0,e:"die Tasche feminin olduğu için Akkusativ'de eine değişmez.",topic:"Akkusativ"},
+ {q:"“Ben bugün çalışmak zorundayım.” hangisi?",o:["Ich muss heute arbeiten.","Ich arbeite heute müssen.","Ich muss arbeite heute."],a:0,e:"müssen çekilir, arbeiten mastar olarak sonda kalır.",topic:"Modalverben"},
+ {q:"Wir haben ___ Auto.",o:["einen","eine","ein"],a:2,e:"das Auto nötrdür; Akkusativ'de ein Auto olarak kalır.",topic:"Akkusativ"},
+ {q:"“Sen burada park edebilirsin çünkü izin var.” için hangi modalverb uygundur?",o:["dürfen","müssen","wollen"],a:0,e:"İzin anlamında dürfen kullanılır.",topic:"Modalverben"},
+ {q:"Ich möchte ___ Kaffee trinken.",o:["ein","einen","eine"],a:1,e:"der Kaffee maskulindir; Akkusativ'de einen Kaffee.",topic:"Karışık"},
+ {q:"Hangisinde fiil dizilimi doğrudur?",o:["Wir wollen Pizza essen.","Wir wollen essen Pizza.","Wir Pizza essen wollen."],a:0,e:"wollen çekimli; essen mastar ve sonda.",topic:"Modalverben"},
+ {q:"08:30 günlük Almancada nasıl söylenir?",o:["halb acht","halb neun","Viertel nach acht"],a:1,e:"halb neun = 08:30; dokuz olmaya yarım saat var.",topic:"Saatler"},
+ {q:"08:45 için doğru ifade hangisi?",o:["Viertel vor neun","Viertel nach neun","halb neun"],a:0,e:"08:45 = dokuza çeyrek var = Viertel vor neun.",topic:"Saatler"},
+ {q:"“Saat 07:10.” hangisi?",o:["zehn vor sieben","zehn nach sieben","halb sieben"],a:1,e:"07:10 = zehn nach sieben.",topic:"Saatler"},
+ {q:"“Bir çay istiyorum.” hangisi?",o:["Ich möchte einen Tee.","Ich möchte ein Tee.","Ich mag einen Tee trinken müssen."],a:0,e:"der Tee → Akkusativ einen Tee; möchten kibar istektir.",topic:"Yeme–İçme"},
+ {q:"Ich mag Pizza. cümlesinin anlamı nedir?",o:["Pizza istiyorum.","Pizzayı severim.","Pizza yemek zorundayım."],a:1,e:"mögen bir şeyi sevmek/hoşlanmak anlamındadır.",topic:"Yeme–İçme"},
+ {q:"“Bir çorba istiyorum.” hangisi?",o:["Ich möchte eine Suppe.","Ich möchte einen Suppe.","Ich muss eine Suppe."],a:0,e:"die Suppe → Akkusativ eine Suppe.",topic:"Yeme–İçme"},
+ {q:"können ve dürfen arasındaki temel fark nedir?",o:["İkisi tamamen aynıdır.","können beceri/imkân, dürfen izin bildirir.","dürfen zorunluluk bildirir."],a:1,e:"können = yapabilmek; dürfen = izinli olmak.",topic:"Modalverben"},
+ {q:"“Selina bir film izlemek istiyor.”",o:["Selina will einen Film sehen.","Selina einen Film will sehen.","Selina will sieht einen Film."],a:0,e:"will çekimli modalverb; einen Film Akkusativ; sehen mastar ve sonda.",topic:"Karışık"}
+]
+let current=0;
+let answers=new Array(quiz.length).fill(null);
+
+function renderQuiz(){
+  const item=quiz[current];
+  document.getElementById("quizStatus").textContent=`Soru ${current+1} / ${quiz.length}`;
+  document.getElementById("question").textContent=item.q;
+  const box=document.getElementById("options"); box.innerHTML="";
+  item.o.forEach((txt,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=txt;
+    b.onclick=()=>{answers[current]=i;renderQuiz()};
+    box.appendChild(b);
+  });
+  document.getElementById("nextBtn").textContent=current===quiz.length-1?"Testi bitir ✓":"Sonraki →";
+}
+function prevQuestion(){if(current>0){current--;renderQuiz()}}
+function nextQuestion(){
+  if(answers[current]===null){alert("Önce bir cevap seç Selina :)");return}
+  if(current<quiz.length-1){current++;renderQuiz()} else finishQuiz();
+}
+function finishQuiz(){
+  let points=0;
+  quiz.forEach((q,i)=>{if(answers[i]===q.a)points++});
+  document.getElementById("quizArea").style.display="none";
+  document.getElementById("score").style.display="block";
+  document.getElementById("scoreNumber").textContent=`${points}/${quiz.length}`;
+  let title,text;
+  if(points===16){title="Perfekt, Selina! 🏆";text="Dört konuyu da çok iyi çözmüş görünüyorsun: Akkusativ, Modalverben, saatler ve yeme–içme.";confetti()}
+  else if(points>=13){title="Sehr gut!";text="Konular büyük ölçüde oturmuş. Yanlış yaptığın birkaç noktayı tekrar etmen yeterli.";confetti()}
+  else if(points>=9){title="Güzel gidiyor.";text="Temel mantık var; özellikle yanlış yaptığın soruların açıklamalarına bak."}
+  else {title="Bir tur daha iyi olur.";text="Hiç sorun değil: önce der→den kuralını ve modalverb + fiil-sonda yapısını tekrar et."}
+  document.getElementById("scoreTitle").textContent=title;
+  document.getElementById("scoreText").textContent=text;
+
+  const review=document.getElementById("review");review.innerHTML="";
+  quiz.forEach((q,i)=>{
+    const ok=answers[i]===q.a;
+    const d=document.createElement("div");d.className="review-item";
+    d.innerHTML=`<b>${ok?"✓":"✗"} ${i+1}. ${q.q}</b>${ok?"Doğru.":`Senin cevabın: ${q.o[answers[i]]}<br>Doğrusu: <b>${q.o[q.a]}</b><br>${q.e}`}`;
+    review.appendChild(d);
+  });
+}
+function restartQuiz(){
+  current=0;answers=new Array(quiz.length).fill(null);
+  document.getElementById("quizArea").style.display="block";
+  document.getElementById("score").style.display="none";
+  renderQuiz();
+}
+function confetti(){
+  const root=document.getElementById("confetti");
+  const colors=["#7357e8","#ff76a8","#29b67a","#f8c95f"];
+  for(let i=0;i<55;i++){
+    const p=document.createElement("span");p.className="piece";
+    p.style.left=Math.random()*100+"vw";
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*.6+"s";
+    p.style.transform=`rotate(${Math.random()*180}deg)`;
+    root.appendChild(p);
+    setTimeout(()=>p.remove(),2500);
+  }
+}
+renderQuiz();
+</script>
+</body>
+</html>
